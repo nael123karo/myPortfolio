@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #4A90E2; /* Biru */
+  --secondary-color: #357ABD; /* Biru lebih gelap */
+  --background-color: #121212; /* Latar belakang gelap */
+  --text-color: #ffffff; /* Teks putih */
+  --hover-color: #3a8cc0; /* Biru lebih cerah saat hover */
+  --accent-color: #ffcc00; /* Kuning Real Madrid */
+}
+
+html, body {
+  background: linear-gradient(to right, #1E1E1E, var(--background-color));
+}
+
+section {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  min-height: 100vh;
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+button:hover {
+  background-color: var(--hover-color);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}
+
+.bg-real-madrid {
+  background: url('./assets/images/my photo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #ffcc00, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.button-primary {
+  background-color: var(--accent-color); /* Kuning Real Madrid */
+  color: black;
+}
+
+.button-secondary {
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.button-primary:hover {
+  background-color: #e0b800; /* Atau gunakan var(--hover-color) jika sesuai */
+}
+
+.button-secondary:hover {
+  background-color: var(--accent-color);
+  color: black;
+}
