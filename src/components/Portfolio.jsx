@@ -28,7 +28,7 @@ const Portfolio = () => {
       tech: ["Vue.Js", "SQL", "Node.Js"],
       demoUrl: "#",
       codeUrl: "#",
-      image: "/src/assets/images/PlayStation rental App picture.webp",
+      image: "src/assets/images/PlayStation rental App picture.webp",
     },
     {
       title: "Global Commerce Engine",
@@ -37,7 +37,7 @@ const Portfolio = () => {
       tech: ["Next.js", "Node.js", "MongoDB", "Redis"],
       demoUrl: "#",
       codeUrl: "#",
-      image: "/src/assets/images/global comerce engine.webp",
+      image: "src/assets/images/global comerce engine.webp",
     },
     {
       title: "DevConnect Platform",
@@ -46,7 +46,7 @@ const Portfolio = () => {
       tech: ["React", "GraphQL", "Docker", "K8s"],
       demoUrl: "#",
       codeUrl: "#",
-      image: "/src/assets/images/dev connect platfrom.webp",
+      image: "src/assets/images/dev connect platfrom.webp",
     },
   ];
 
@@ -237,7 +237,7 @@ const Portfolio = () => {
             <div className="relative w-40 h-40 mx-auto mb-8">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-emerald-500 animate-spin-slow" />
               <img
-                src="/src/assets/images/my photo.jpg"
+                src="src/assets/images/my photo.jpg"
                 alt="Profile"
                 className="relative w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-gray-600 hover:border-blue-500 transition-colors duration-300"
                 style={{ objectFit: "cover" }}
