@@ -46,15 +46,10 @@ button:focus-visible {
   }
 }
 
-.bg-real-madrid {
-  background: url('./assets/images/my photo.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-}
+
 
 .text-gradient {
   background: linear-gradient(90deg, #ffcc00, #ffffff);
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
