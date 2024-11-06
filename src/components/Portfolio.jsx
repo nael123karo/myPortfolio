@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import playstationImage from "../assets/images/PlayStation_rental_App_picture.webp";
+import globalCommerceImage from "../assets/images/global_comerce_engine.webp";
+import devConnectImage from "../assets/images/dev_connect.webp";
+import myPhoto from "../assets/images/my_photo.jpg"; // Sesuaikan jalur jika perlu
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -31,8 +35,8 @@ const Portfolio = () => {
       tech: ["Vue.Js", "SQL", "Node.Js"],
       demoUrl: "#",
       codeUrl: "#",
-      image: '/assets/images/PlayStation_rental_App_picture.webp', // Jalur relatif dari folder public
-  },
+      image: playstationImage,
+    },
     {
       title: "Global Commerce Engine",
       description:
@@ -40,7 +44,7 @@ const Portfolio = () => {
       tech: ["Next.js", "Node.js", "MongoDB", "Redis"],
       demoUrl: "#",
       codeUrl: "#",
-      image: '/assets/images/global_comerce_engine.webp',
+      image: globalCommerceImage,
     },
     {
       title: "DevConnect Platform",
@@ -49,7 +53,7 @@ const Portfolio = () => {
       tech: ["React", "GraphQL", "Docker", "K8s"],
       demoUrl: "#",
       codeUrl: "#",
-      image: '/assets/images/dev_connect_platfrom.webp',
+      image: devConnectImage,
     },
   ];
 
@@ -314,7 +318,7 @@ const Portfolio = () => {
             <div className="relative w-40 h-40 mx-auto mb-8">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-emerald-500 animate-spin-slow" />
               <img
-                src='/assets/images/my_photo.jpg'
+                src={myPhoto} // Gunakan variabel yang diimpor
                 alt="Profile"
                 className="relative w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-gray-600 hover:border-blue-500 transition-colors duration-300"
                 style={{ objectFit: "cover" }}
