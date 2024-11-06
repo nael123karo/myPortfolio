@@ -12,6 +12,9 @@ import {
   Menu,
   X,
   ChevronDown,
+  Instagram,
+  MessageSquare,
+  Phone,
 } from "lucide-react";
 
 const Portfolio = () => {
@@ -94,6 +97,39 @@ const Portfolio = () => {
       ],
       icon: <Box className="w-6 h-6" />,
     },
+    {
+      category: "Mobile",
+      techs: [
+        { name: "React Native", level: 75 },
+        { name: "Flutter", level: 70 },
+        { name: "iOS", level: 65 },
+        { name: "Android", level: 65 },
+      ],
+      icon: <Phone className="w-6 h-6" />,
+    },
+  ];
+
+  const socialLinks = [
+    {
+      name: "WhatsApp",
+      icon: <Phone className="w-5 h-5" />,
+      url: "https://wa.me/yournumber",
+    },
+    {
+      name: "Instagram",
+      icon: <Instagram className="w-5 h-5" />,
+      url: "https://instagram.com/yourhandle",
+    },
+    {
+      name: "LinkedIn",
+      icon: <Linkedin className="w-5 h-5" />,
+      url: "https://linkedin.com/in/yourprofile",
+    },
+    {
+      name: "GitHub",
+      icon: <Github className="w-5 h-5" />,
+      url: "https://github.com/yourusername",
+    },
   ];
 
   const handleNameClick = () => {
@@ -142,11 +178,53 @@ const Portfolio = () => {
       setIsMenuOpen(false);
     }
   };
+  // New function for form handling
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [formStatus, setFormStatus] = useState({
+    isSubmitting: false,
+    isSubmitted: false,
+    error: null,
+  });
+
+  const handleFormChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus({ isSubmitting: true, isSubmitted: false, error: null });
+
+    try {
+      // Here you would typically make an API call to your backend
+      // For demonstration, we'll simulate an API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setFormStatus({
+        isSubmitting: false,
+        isSubmitted: true,
+        error: null,
+      });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      setFormStatus({
+        isSubmitting: false,
+        isSubmitted: false,
+        error: "Failed to send message. Please try again.",
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-    
-
       {/* Navigation */}
       <nav className="fixed w-full z-40 backdrop-blur-lg bg-gray-900/80 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -156,11 +234,7 @@ const Portfolio = () => {
               animate={{ opacity: 1, x: 0 }}
               className="text-2xl font-bold"
             >
-              <span
-                
-              >
-                Natanael Detamor
-              </span>
+              <span>Natanael Detamor</span>
             </motion.h1>
 
             <div className="hidden md:flex space-x-8">
@@ -224,7 +298,10 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section
+        id="hero"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
         <div className="absolute inset-0 bg-gradient-to-b from-blue-600/20 to-gray-900" />
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -246,15 +323,15 @@ const Portfolio = () => {
           </motion.div>
 
           <motion.h1
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold mb-6"
-        >
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-            {displayText} {/* Menggunakan state displayText */}
-          </span>
-        </motion.h1>
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl md:text-7xl font-bold mb-6"
+          >
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+              {displayText} {/* Menggunakan state displayText */}
+            </span>
+          </motion.h1>
 
           <motion.p
             initial={{ y: 20, opacity: 0 }}
@@ -485,7 +562,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Updated Skills Section */}
       <section id="skills" className="py-20 px-4 bg-gray-800/50">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -499,7 +576,7 @@ const Portfolio = () => {
             </span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
@@ -507,28 +584,22 @@ const Portfolio = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300"
+                className="bg-white/5 rounded-xl p-6 hover:bg-white/10 transition-all duration-300"
               >
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="p-3 bg-blue-500/10 rounded-lg text-blue-400">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-blue-500/10 rounded-lg">
                     {skill.icon}
                   </div>
                   <h3 className="text-xl font-semibold">{skill.category}</h3>
                 </div>
-
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {skill.techs.map((tech, techIndex) => (
-                    <motion.div
-                      key={techIndex}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      viewport={{ once: true }}
-                    >
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-300">{tech.name}</span>
+                    <div key={techIndex} className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>{tech.name}</span>
                         <span className="text-blue-400">{tech.level}%</span>
                       </div>
-                      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${tech.level}%` }}
@@ -537,7 +608,7 @@ const Portfolio = () => {
                           className="h-full bg-gradient-to-r from-blue-500 to-emerald-500"
                         />
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </motion.div>
@@ -546,7 +617,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Updated Contact Section with Social Links */}
       <section id="contact" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -556,68 +627,125 @@ const Portfolio = () => {
             className="text-4xl font-bold text-center mb-16"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-              Get In Touch
+              Get in Touch
             </span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Mail className="w-6 h-6" />,
-                title: "Email",
-                value: "nael@detamor.com",
-                href: "mailto:nael@detamor.com",
-                color: "blue",
-              },
-              {
-                icon: <Github className="w-6 h-6" />,
-                title: "GitHub",
-                value: "@naeldetamor",
-                href: "https://github.com",
-                color: "purple",
-              },
-              {
-                icon: <Linkedin className="w-6 h-6" />,
-                title: "LinkedIn",
-                value: "Nael Detamor",
-                href: "https://linkedin.com",
-                color: "sky",
-              },
-              {
-                icon: <FileText className="w-6 h-6" />,
-                title: "Resume",
-                value: "Download CV",
-                href: "/resume.pdf",
-                color: "emerald",
-              },
-            ].map((contact, index) => (
-              <motion.a
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                href={contact.href}
-                className="group bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300 hover:scale-105"
-              >
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <div
-                    className={`p-4 bg-${contact.color}-500/10 rounded-full text-${contact.color}-400 
-                    group-hover:scale-110 transition-transform duration-300`}
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Let's Connect</h3>
+                <p className="text-gray-400 mb-6">
+                  Feel free to reach out for collaborations or just a friendly
+                  hello
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {socialLinks.map((link, index) => (
+                  <motion.a
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300"
                   >
-                    {contact.icon}
+                    <div className="p-2 bg-blue-500/10 rounded-lg">
+                      {link.icon}
+                    </div>
+                    <span>{link.name}</span>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-gray-400 mb-2">Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleFormChange}
+                      className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                      required
+                    />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">{contact.title}</h3>
-                    <p className="text-gray-400">{contact.value}</p>
+                    <label className="block text-gray-400 mb-2">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleFormChange}
+                      className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                      required
+                    />
                   </div>
                 </div>
-              </motion.a>
-            ))}
+                <div>
+                  <label className="block text-gray-400 mb-2">Subject</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleFormChange}
+                    className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-2">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleFormChange}
+                    rows="5"
+                    className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={formStatus.isSubmitting}
+                  className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-medium
+                ${
+                  formStatus.isSubmitting
+                    ? "opacity-75 cursor-not-allowed"
+                    : "hover:scale-105"
+                }
+                transition-all duration-300`}
+                >
+                  {formStatus.isSubmitting ? "Sending..." : "Send Message"}
+                </button>
+                {formStatus.isSubmitted && (
+                  <p className="text-green-400 text-center">
+                    Message sent successfully!
+                  </p>
+                )}
+                {formStatus.error && (
+                  <p className="text-red-400 text-center">{formStatus.error}</p>
+                )}
+              </form>
+            </motion.div>
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">

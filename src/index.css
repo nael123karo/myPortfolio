@@ -46,8 +46,6 @@ button:focus-visible {
   }
 }
 
-
-
 .text-gradient {
   background: linear-gradient(90deg, #ffcc00, #ffffff);
   -webkit-text-fill-color: transparent;
