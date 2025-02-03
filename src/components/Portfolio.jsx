@@ -132,7 +132,7 @@ const Portfolio = () => {
     {
       name: "GitHub",
       icon: <Github className="w-5 h-5" />,
-      url: "https://github.com/yourusername",
+      url: "https://github.com/nael123karo",
     },
   ];
 
