@@ -58,29 +58,28 @@ const Portfolio = () => {
       certificateName: "Belajar Dasar AI",
       issuer: "Dicoding",
       dateIssued: "2023",
-      fileLink: "/src/assets/sertifikat belajar dasar ai.pdf",
+      fileLink: "/certificates/sertifikat%20belajar%20dasar%20ai.pdf",
     },
     {
       certificateName: "Belajar Dasar AWS Cloud",
       issuer: "Dicoding",
       dateIssued: "2022",
-      fileLink: "/src/assets/sertifikast Belajar dasar aws cloud.pdf",
+      fileLink: "/certificates/sertifikat%20Belajar%20dasar%20aws%20cloud.pdf",
     },
     {
       certificateName: "Belajar Dasar Pemrograman Javascript",
       issuer: "Dicoding",
       dateIssued: "2022",
-      fileLink:
-        "/src/assets/sertifikat belajar dasar pemrograman javascript.pdf",
+      fileLink: "/certificates/sertifikat%20belajar%20dasar%20pemrograman%20javascript.pdf",
     },
     {
       certificateName: "Belajar Back-End Pemula dengan Javascript",
       issuer: "Dicoding",
       dateIssued: "2022",
-      fileLink:
-        "/src/assets/sertifikat Belajar Back-End Pemula dengan JavaScript.pdf",
+      fileLink: "/certificates/sertifikat%20Belajar%20Back-End%20Pemula%20dengan%20JavaScript.pdf",
     },
   ];
+  
 
   const skills = [
     {
