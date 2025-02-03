@@ -16,7 +16,7 @@ import {
   Menu,
   ChevronDown,
   Users,
-  CodeIcon,
+  DatabaseIcon,
 } from "lucide-react";
 
 const Portfolio = () => {
@@ -102,7 +102,7 @@ const Portfolio = () => {
         { name: "SQL", level: 65 },
         { name: "C#", level: 40 },
       ],
-      icon: <CodeIcon className="w-6 h-6 text-white-500"></CodeIcon>
+      icon: <DatabaseIcon className="w-6 h-6 text-white-500"></DatabaseIcon>
     },
     {
       category: "Soft Skills",
