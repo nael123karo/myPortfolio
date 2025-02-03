@@ -15,6 +15,8 @@ import {
   X,
   Menu,
   ChevronDown,
+  Users,
+  CodeIcon,
 } from "lucide-react";
 
 const Portfolio = () => {
@@ -45,8 +47,8 @@ const Portfolio = () => {
     {
       title: "TOP UP STORE",
       description:
-        "Revolutionary developer collaboration tool with integrated AI code review.",
-      tech: ["React", "GraphQL", "Docker", "K8s"],
+        "Create a website for Top Up Games using a simple store using html, css, javascript, and Bootstrap ",
+      tech: ["Html", "CSS", "Javascript", "Bootstrap" ],
       demoUrl: "#",
       codeUrl: "#",
       image: devConnectImage,
@@ -85,32 +87,32 @@ const Portfolio = () => {
     {
       category: "Frontend",
       techs: [
-        { name: "React.js", level: 90 },
-        { name: "Vue.js", level: 85 },
-        { name: "Tailwind CSS", level: 95 },
-        { name: "TypeScript", level: 80 },
+        { name: "React.js", level: 40 },
+        { name: "Vue.js", level: 55 },
+        { name: "Tailwind CSS", level: 65 },
+        { name: "Bootstrap", level: 60 },
       ],
       icon: <Code className="w-6 h-6" />,
     },
     {
       category: "Backend",
       techs: [
-        { name: "Node.js", level: 85 },
-        { name: "Python", level: 80 },
-        { name: "SQL", level: 75 },
-        { name: "C#", level: 70 },
+        { name: "Node.js", level: 45 },
+        { name: "Python", level: 50 },
+        { name: "SQL", level: 65 },
+        { name: "C#", level: 40 },
       ],
-      icon: <Phone className="w-6 h-6" />,
+      icon: <CodeIcon className="w-6 h-6 text-white-500"></CodeIcon>
     },
     {
       category: "Soft Skills",
       techs: [
-        { name: "Problem Solving", level: 85 }, // Menambahkan tingkat
-        { name: "Komunikasi yang Baik", level: 80 }, // Menambahkan tingkat
-        { name: "Memahami Konsep Bisnis", level: 75 }, // Menambahkan tingkat
-        { name: "Menguasai Framework", level: 70 }, // Menambahkan tingkat
+        { name: "Problem Solving", level: 55 }, // Menambahkan tingkat
+        { name: "Komunikasi yang Baik", level: 70 }, // Menambahkan tingkat
+        { name: "Kemampuan Mempelajari Hal baru", level: 65 }, // Menambahkan tingkat
+        { name: "Menguasai Framework", level: 50 }, // Menambahkan tingkat
       ],
-      icon: <Phone className="w-6 h-6" />, // Ganti ikon sesuai kebutuhan
+      icon: <Users className="w-6 h-6 text-white-500" />, // Ganti ikon sesuai kebutuhan
     },
   ];
   const socialLinks = [
@@ -380,14 +382,13 @@ const Portfolio = () => {
               className="space-y-6"
             >
               <p className="text-xl text-gray-300">
-                "Hello, my name is Natanael, a 5th semester student in Computer
-                Engineering at Universitas Advent Indonesia. Originally from
+                "Hello, My Name is Natanael, a 6th semester student in Informatics Engineering
+                 at Universitas Advent Indonesia. Originally from
                 Medan, I am currently studying in Bandung."
               </p>
               <p className="text-xl text-gray-300">
-                "With a deep interest in technology, especially in web
-                programming, I strive to continuously learn and develop myself
-                as a frontend developer."
+                "With a deep interest in technology, especially in Javascript Framework and Go-lang, I strive to continuously learn and develop myself
+                as Software Engineering Intern."
               </p>
             </motion.div>
 
