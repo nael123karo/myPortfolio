@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import playstationImage from "../assets/images/RentalPlaystation.jpg";
 import globalCommerceImage from "../assets/images/global_comerce_engine.webp";
 import devConnectImage from "../assets/images/web top up.jpg";
-import myPhoto from "../assets/images/my_photo.jpg";
+import myPhoto from "../assets/images/my_photo1.jpg";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -17,6 +17,7 @@ import {
   ChevronDown,
   Users,
   DatabaseIcon,
+  ArrowUp,
 } from "lucide-react";
 
 const Portfolio = () => {
@@ -24,6 +25,7 @@ const Portfolio = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [displayText, setDisplayText] = useState("Software Engineering");
+  const [isVisible, setIsVisible] = useState(false);
 
   const projects = [
     {
@@ -48,7 +50,7 @@ const Portfolio = () => {
       title: "TOP UP STORE",
       description:
         "Create a website for Top Up Games using a simple store using html, css, javascript, and Bootstrap ",
-      tech: ["Html", "CSS", "Javascript", "Bootstrap" ],
+      tech: ["Html", "CSS", "Javascript", "Bootstrap"],
       demoUrl: "#",
       codeUrl: "#",
       image: devConnectImage,
@@ -72,16 +74,17 @@ const Portfolio = () => {
       certificateName: "Belajar Dasar Pemrograman Javascript",
       issuer: "Dicoding",
       dateIssued: "2022",
-      fileLink: "/certificates/sertifikat%20belajar%20dasar%20pemrograman%20javascript.pdf",
+      fileLink:
+        "/certificates/sertifikat%20belajar%20dasar%20pemrograman%20javascript.pdf",
     },
     {
       certificateName: "Belajar Back-End Pemula dengan Javascript",
       issuer: "Dicoding",
       dateIssued: "2022",
-      fileLink: "/certificates/sertifikat%20Belajar%20Back-End%20Pemula%20dengan%20JavaScript.pdf",
+      fileLink:
+        "/certificates/sertifikat%20Belajar%20Back-End%20Pemula%20dengan%20JavaScript.pdf",
     },
   ];
-  
 
   const skills = [
     {
@@ -102,7 +105,7 @@ const Portfolio = () => {
         { name: "SQL", level: 65 },
         { name: "C#", level: 40 },
       ],
-      icon: <DatabaseIcon className="w-6 h-6 text-white-500"></DatabaseIcon>
+      icon: <DatabaseIcon className="w-6 h-6 text-white-500"></DatabaseIcon>,
     },
     {
       category: "Soft Skills",
@@ -149,7 +152,14 @@ const Portfolio = () => {
       const currentProgress = (window.pageYOffset / totalScroll) * 100;
       setScrollProgress(currentProgress);
 
-      // Perbarui bagian aktif berdasarkan posisi scroll
+      // Toggle scroll-to-top button visibility
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+
+      // Update active section
       const sections = [
         "hero",
         "about",
@@ -182,6 +192,13 @@ const Portfolio = () => {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
     }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   // Form handling
@@ -219,20 +236,20 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {/* Navigation */}
+    <div className="min-h-screen bg-gray-900 text-white relative">
+      {/* Navigation - Improved Mobile Responsiveness */}
       <nav className="fixed w-full z-40 backdrop-blur-lg bg-gray-900/80 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <motion.h1
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-2xl font-bold"
+              className="text-xl sm:text-2xl font-bold"
             >
               Natanael Detamor
             </motion.h1>
 
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex space-x-4 lg:space-x-8">
               {["About", "Projects", "Certificates", "Skills", "Contact"].map(
                 (item, index) => (
                   <motion.a
@@ -241,7 +258,7 @@ const Portfolio = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => scrollToSection(item.toLowerCase())}
-                    className={`cursor-pointer px-4 py-2 rounded-lg transition-all duration-300 ${
+                    className={`cursor-pointer px-3 py-2 text-sm lg:text-base rounded-lg transition-all duration-300 ${
                       activeSection === item.toLowerCase()
                         ? "text-blue-400 bg-white/10"
                         : "text-gray-300 hover:text-blue-400 hover:bg-white/5"
@@ -256,6 +273,7 @@ const Portfolio = () => {
             <button
               className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -265,14 +283,19 @@ const Portfolio = () => {
             </button>
           </div>
 
+          {/* Mobile Menu - Improved Animation and Styling */}
           {isMenuOpen && (
-            <div className="md:hidden py-4">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="md:hidden py-4 absolute top-16 left-0 right-0 bg-gray-900/95 border-b border-white/10"
+            >
               {["About", "Projects", "Certificates", "Skills", "Contact"].map(
                 (item) => (
                   <a
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
-                    className={`block px-4 py-2 rounded-lg transition-all duration-300 ${
+                    className={`block px-4 py-3 text-center transition-all duration-300 ${
                       activeSection === item.toLowerCase()
                         ? "text-blue-400 bg-white/10"
                         : "text-gray-300 hover:text-blue-400 hover:bg-white/5"
@@ -282,30 +305,29 @@ const Portfolio = () => {
                   </a>
                 )
               )}
-            </div>
+            </motion.div>
           )}
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Improved Mobile Responsiveness */}
       <section
         id="hero"
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-16 md:pt-0"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-blue-600/20 to-gray-900" />
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative w-40 h-40 mx-auto mb-8"
+            className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 sm:mb-8"
           >
             <img
               src={myPhoto}
               alt="Profile"
-              className="relative w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-gray-600 hover:border-blue-500 transition-colors duration-300"
-              style={{ objectFit: "cover" }}
+              className="w-full h-full rounded-full border-4 border-gray-600 hover:border-blue-500 transition-colors duration-300 object-cover"
             />
           </motion.div>
 
@@ -313,7 +335,7 @@ const Portfolio = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
               {displayText}
@@ -324,7 +346,7 @@ const Portfolio = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl text-gray-300 mb-12"
+            className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-12 px-4"
           >
             Transforming ideas into exceptional digital experiences.
           </motion.p>
@@ -333,33 +355,23 @@ const Portfolio = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-5 ml-8"
+            className="flex justify-center gap-4 px-4"
           >
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-8 py-3 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full hover:scale-105 transition-all duration-300"
+              className="px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full hover:scale-105 transition-all duration-300 text-sm sm:text-base whitespace-nowrap"
             >
               Let's Talk
             </button>
             <button
               onClick={() => scrollToSection("projects")}
-              className="px-8 py-3 bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300"
+              className="px-6 sm:px-8 py-3 bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300 text-sm sm:text-base whitespace-nowrap"
             >
               View Work
             </button>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
-          >
-            <ChevronDown className="w-6 h-6 text-gray-400" />
-          </motion.div>
         </div>
       </section>
-
       {/* About Section */}
       <section id="about" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -382,13 +394,14 @@ const Portfolio = () => {
               className="space-y-6"
             >
               <p className="text-xl text-gray-300">
-                "Hello, My Name is Natanael, a 6th semester student in Informatics Engineering
-                 at Universitas Advent Indonesia. Originally from
-                Medan, I am currently studying in Bandung."
+                "Hello, My Name is Natanael, a 6th semester student in
+                Informatics Engineering at Universitas Advent Indonesia.
+                Originally from Medan, I am currently studying in Bandung."
               </p>
               <p className="text-xl text-gray-300">
-                "With a deep interest in technology, especially in Javascript Framework and Go-lang, I strive to continuously learn and develop myself
-                as Software Engineering Intern."
+                "With a deep interest in technology, especially in Javascript
+                Framework and Go-lang, I strive to continuously learn and
+                develop myself as Software Engineering Intern."
               </p>
             </motion.div>
 
@@ -419,21 +432,21 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 bg-gray-800/50">
+      {/* Projects Section - Improved Grid Layout */}
+      <section id="projects" className="py-16 sm:py-20 px-4 bg-gray-800/50">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16"
+            className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
               Featured Projects
             </span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
@@ -449,41 +462,25 @@ const Portfolio = () => {
                     alt={project.title}
                     className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-3">
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 mb-6">{project.description}</p>
+                  <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
+                    {project.description}
+                  </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm"
+                        className="px-2 sm:px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs sm:text-sm"
                       >
                         {tech}
                       </span>
                     ))}
-                  </div>
-
-                  <div className="flex gap-4">
-                    <a
-                      href={project.demoUrl}
-                      className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.codeUrl}
-                      className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
-                    >
-                      <Code className="w-4 h-4" />
-                      View Code
-                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -491,7 +488,7 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
-
+      
       {/* Certificates Section */}
       <section id="certificates" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -545,22 +542,22 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 bg-gray-800/50">
+      
+      {/* Skills Section - Improved Mobile Layout */}
+      <section id="skills" className="py-16 sm:py-20 px-4 bg-gray-800/50">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16"
+            className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
               Technical Skills
             </span>
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
@@ -568,18 +565,20 @@ const Portfolio = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white/5 rounded-xl p-6 hover:bg-white/10 transition-all duration-300"
+                className="bg-white/5 rounded-xl p-4 sm:p-6 hover:bg-white/10 transition-all duration-300"
               >
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
                   <div className="p-2 bg-blue-500/10 rounded-lg">
                     {skill.icon}
                   </div>
-                  <h3 className="text-xl font-semibold">{skill.category}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold">
+                    {skill.category}
+                  </h3>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {skill.techs.map((tech, techIndex) => (
                     <div key={techIndex} className="space-y-2">
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-xs sm:text-sm">
                         <span>{tech.name}</span>
                         <span className="text-blue-400">{tech.level}%</span>
                       </div>
@@ -600,36 +599,39 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4">
+
+      {/* Contact Section - Improved Form Layout */}
+      <section id="contact" className="py-16 sm:py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16"
+            className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
               Get in Touch
             </span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8"
             >
               <div>
-                <h3 className="text-2xl font-semibold mb-4">Let's Connect</h3>
-                <p className="text-gray-400 mb-6">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
+                  Let's Connect
+                </h3>
+                <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
                   Feel free to reach out for collaborations or just a friendly
                   hello.
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {socialLinks.map((link, index) => (
                   <motion.a
                     key={index}
@@ -640,12 +642,12 @@ const Portfolio = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300"
+                    className="flex items-center gap-4 p-3 sm:p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="p-2 bg-blue-500/10 rounded-lg">
                       {link.icon}
                     </div>
-                    <span>{link.name}</span>
+                    <span className="text-sm sm:text-base">{link.name}</span>
                   </motion.a>
                 ))}
               </div>
@@ -656,57 +658,65 @@ const Portfolio = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-gray-400 mb-2">Name</label>
+                    <label className="block text-gray-400 text-sm mb-2">
+                      Name
+                    </label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleFormChange}
-                      className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-sm sm:text-base"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-400 mb-2">Email</label>
+                    <label className="block text-gray-400 text-sm mb-2">
+                      Email
+                    </label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleFormChange}
-                      className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-sm sm:text-base"
                       required
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-gray-400 mb-2">Subject</label>
+                  <label className="block text-gray-400 text-sm mb-2">
+                    Subject
+                  </label>
                   <input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleFormChange}
-                    className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-sm sm:text-base"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-400 mb-2">Message</label>
+                  <label className="block text-gray-400 text-sm mb-2">
+                    Message
+                  </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleFormChange}
-                    rows="5"
-                    className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    rows="4"
+                    className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-sm sm:text-base"
                     required
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={formStatus.isSubmitting}
-                  className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-medium ${
+                  className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-medium text-sm sm:text-base ${
                     formStatus.isSubmitting
                       ? "opacity-75 cursor-not-allowed"
                       : "hover:scale-105"
@@ -715,12 +725,14 @@ const Portfolio = () => {
                   {formStatus.isSubmitting ? "Sending..." : "Send Message"}
                 </button>
                 {formStatus.isSubmitted && (
-                  <p className="text-green-400 text-center">
+                  <p className="text-green-400 text-center text-sm sm:text-base">
                     Message sent successfully!
                   </p>
                 )}
                 {formStatus.error && (
-                  <p className="text-red-400 text-center">{formStatus.error}</p>
+                  <p className="text-red-400 text-center text-sm sm:text-base">
+                    {formStatus.error}
+                  </p>
                 )}
               </form>
             </motion.div>
@@ -728,10 +740,23 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t border-white/10">
+      {/* Scroll to Top Button - Improved Mobile Position */}
+      {isVisible && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50 bg-gradient-to-r from-blue-500 to-emerald-500 p-2 sm:p-3 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        </motion.button>
+      )}
+
+      {/* Footer - Improved Spacing */}
+      <footer className="py-6 sm:py-8 px-4 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400">
+          <p className="text-gray-400 text-sm sm:text-base">
             © 2024 Natanael Detamor. Crafted with passion and code.
           </p>
         </div>
