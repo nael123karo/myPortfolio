@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Code, GraduationCap, MapPin, Cpu } from "lucide-react";
 
 const AboutSection = () => {
   return (
@@ -9,87 +8,66 @@ const AboutSection = () => {
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
       
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.h2
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="text-4xl font-bold text-center mb-10 relative text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400"
         >
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-            About Me
-          </span>
+          About Me
+          <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-blue-400 to-emerald-400"></span>
         </motion.h2>
-
-        <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
-          {/* About Text with Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
+        
+        {/* About content with image and slightly centered position */}
+        <div className="flex flex-wrap items-center justify-between max-w-5xl mx-auto">
+          {/* About text */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6 md:col-span-3"
+            transition={{ duration: 0.6 }}
+            className="flex-1 min-w-[300px] pr-0 md:pr-10 mb-10 md:mb-0"
           >
-            <div className="bg-white/5 p-6 rounded-xl border border-white/10 backdrop-blur-sm shadow-xl hover:bg-white/10 transition-all duration-300">
-              <p className="text-xl text-gray-300 leading-relaxed">
-                "Hello, My Name is <span className="text-blue-400 font-semibold">Natanael</span>, a 6th semester student in Informatics Engineering at Universitas Advent Indonesia. Originally from Medan, I am currently studying in Bandung."
-              </p>
-            </div>
+            <h3 className="text-3xl font-bold text-white mb-6">Hello, I'm Nael!</h3>
             
-            <div className="bg-white/5 p-6 rounded-xl border border-white/10 backdrop-blur-sm shadow-xl hover:bg-white/10 transition-all duration-300">
-              <p className="text-xl text-gray-300 leading-relaxed">
-                "With a deep interest in technology, especially in <span className="text-emerald-400 font-semibold">Javascript Framework</span> and <span className="text-emerald-400 font-semibold">Go-lang</span>, I strive to continuously learn and develop myself as Software Engineering Intern."
-              </p>
-            </div>
+            <p className="text-[#ccc] mb-4">
+              "Hello, My Name is Natanael, a 6th semester student in Informatics Engineering at Universitas Advent Indonesia. Originally from Medan, I am currently studying in Bandung."
+            </p>
+            
+            <p className="text-[#ccc] mb-4">
+              I enjoy the challenge of solving complex problems and turning ideas into reality through clean and efficient code. My goal is to create digital experiences that not only look great but also provide real value to users.
+            </p>
+            
+            <p className="text-[#ccc] mb-6">
+              "With a deep interest in technology, especially in Javascript Framework and Go-lang, I strive to continuously learn and develop myself as Software Engineering Intern."
+            </p>
+            
+            <motion.a
+              href="#contact"
+              whileHover={{ y: -3, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+              transition={{ duration: 0.3 }}
+              className="inline-block bg-transparent border-2 py-3 px-8 text-base font-medium rounded mt-4 cursor-pointer border-gradient-to-r from-blue-400 to-emerald-400 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400"
+            >
+              Get in Touch
+            </motion.a>
           </motion.div>
-
-          {/* Stats with Icons */}
+          
+          {/* About image */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 gap-4 md:col-span-2"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex-1 min-w-[300px] flex justify-center"
           >
-            {[
-              { 
-                label: "Certificates", 
-                value: "4", 
-                icon: <GraduationCap className="w-8 h-8 text-blue-400" />,
-                color: "from-blue-500 to-blue-700"
-              },
-              { 
-                label: "Projects", 
-                value: "3+", 
-                icon: <Code className="w-8 h-8 text-emerald-400" />,
-                color: "from-emerald-500 to-emerald-700"
-              },
-              { 
-                label: "Location", 
-                value: "Bandung, ID", 
-                icon: <MapPin className="w-8 h-8 text-rose-400" />,
-                color: "from-rose-500 to-rose-700"
-              },
-              { 
-                label: "Focus", 
-                value: "Software Engineering", 
-                icon: <Cpu className="w-8 h-8 text-purple-400" />,
-                color: "from-purple-500 to-purple-700"
-              },
-            ].map((stat, index) => (
-              <motion.div 
-                key={index} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white/5 p-5 rounded-xl border border-white/10 backdrop-blur-sm shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
-              >
-                <div className={`p-3 rounded-full bg-gradient-to-r ${stat.color} mb-3 w-fit`}>
-                  {stat.icon}
-                </div>
-                <h3 className="text-gray-400 text-sm mb-2">{stat.label}</h3>
-                <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">{stat.value}</p>
-              </motion.div>
-            ))}
+            <div className="relative w-full max-w-[400px]">
+              <img 
+                src="/src/assets/images/my_photo1.jpg" 
+                alt="Natanael Detamor" 
+                className="w-full rounded-lg border-[3px] relative z-10"
+                style={{ borderImage: 'linear-gradient(to right, #60a5fa, #34d399) 1' }}
+              />
+              <div className="absolute w-full h-full rounded-lg top-6 left-6 z-0 bg-gradient-to-r from-blue-500/20 to-emerald-500/20"></div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -98,3 +76,4 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+
